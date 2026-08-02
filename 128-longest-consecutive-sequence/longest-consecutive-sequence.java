@@ -3,28 +3,24 @@ class Solution {
         if(nums.length==0){
             return 0;
         }
-        Arrays.sort(nums);
-        int index = 0;
-        for(int i=1;i<nums.length;i++){
-            if(nums[i-1]!=nums[i]){
-                nums[index++] = nums[i-1];
-            }
+        HashSet <Integer> set = new HashSet<>();
+        for(int num : nums){
+            set.add(num);
         }
-        nums[index++] = nums[nums.length - 1];
-        int maxlen = 1;
-        int count = 1;
 
-        for(int i=1;i<index;i++){
-            if(nums[i-1]== nums[i]-1){
-                count++;
-                if(maxlen < count){
-                    maxlen = count;
+        int longest  = 0;
+        for(int num : set){
+            if(!set.contains(num-1)){
+                int currentNum = num;
+                int currentLength = 1;
+
+                while(set.contains(currentNum+1)){
+                    currentNum++;
+                    currentLength++;
                 }
-            }else{
-                count = 1;
+                longest = Math.max(longest,currentLength);
             }
-
         }
-        return maxlen;
+        return longest;
     }
 }
