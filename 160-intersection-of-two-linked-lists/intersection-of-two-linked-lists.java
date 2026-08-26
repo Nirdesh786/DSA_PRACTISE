@@ -12,25 +12,12 @@
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         ListNode slow = headA;
-        ListNode fast =  headB;
-        if(slow==null) return fast;
-        if(fast==null) return slow;
-     while(slow!=fast){
-        
-        if(slow==null){
-            slow = headB;
-        }else{
-  slow = slow.next;
+        ListNode fast = headB;
+
+        while(slow !=fast){
+            slow = (slow==null) ? headB: slow.next;
+            fast = (fast==null) ? headA: fast.next;
         }
-      
-        
-        if(fast==null){
-            fast = headA;
-        }else{
- fast = fast.next;
-        }
-       
-     }
-     return slow;
+        return slow;
     }
 }
